@@ -21,7 +21,7 @@ if [ $# -gt 3 ]; then
 fi
 
 VERSION_ARG="$(echo "$1" | tr '[:lower:]' '[:upper:]')"
-VERSION_FILE="$2"
+VERSION_PROJECT="$2"
 VERSION_SORT="$3"
 SEMVER_FORMAT='[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+'
 
@@ -69,13 +69,8 @@ fi
 # read version file (if version not found by tags)
 
 if [ -z "$VERSION_CURRENT" ]; then
-    if [ -z "$VERSION_FILE" ]; then
-        ROOT_DIR=$(git rev-parse --show-toplevel 2> /dev/null)
-        VERSION_FILE="$ROOT_DIR/VERSION"
-    fi
-
-    if [ -f "$VERSION_FILE" ]; then
-        VERSION_CURRENT=$(cat $VERSION_FILE)
+    if [ ! -z $VERSION_PROJECT ]; then
+        VERSION_CURRENT=$VERSION_PROJECT
     fi
 fi
 

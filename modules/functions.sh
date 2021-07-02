@@ -55,3 +55,15 @@ function __is_binary {
 
     return 1
 }
+
+PROJ_FILE=$ROOT_DIR/gpn.xcodeproj/project.pbxproj
+
+function __get_project_version {
+    echo `sed -n '/MARKETING_VERSION/{s/MARKETING_VERSION = //;s/;//;s/^[[:space:]]*//;p;q;}' $PROJ_FILE`
+}
+
+function __set_project_version {
+    sed -i -E "s/MARKETING_VERSION = $1/MARKETING_VERSION = $2/g" $PROJ_FILE
+    rm "$PROJ_FILE-E"
+    echo "$PROJ_FILE"
+}

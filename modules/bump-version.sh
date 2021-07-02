@@ -10,8 +10,8 @@ if [ -z "$VERSION" ]; then
     fi
 fi
 
-VERSION_FILE=$(__get_version_file)
-VERSION=$($HOOKS_DIR/modules/semverbump.sh "$VERSION" "$VERSION_FILE" "$VERSION_SORT")
+VERSION_PROJECT=$(__get_project_version)
+VERSION=$($HOOKS_DIR/modules/semverbump.sh "$VERSION" "$VERSION_PROJECT" "$VERSION_SORT")
 
 if [ $? -ne 0 ]; then
     __print_fail "Unable to bump version."
